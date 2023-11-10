@@ -1,50 +1,45 @@
-// SearchBar.jsx
-
-import React, { useState, useEffect } from "react";
-import MovieItem from "./MovieItem";
+import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { MovieContext } from "../context/MovieContext";
 import "./SearchBar.css";
 
 const apiKey = "85a6b417525168d12e79799b0228bf42";
 
 const SearchBar = () => {
-  const [searchTerm, setSearchTerm] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-  const [isSearching, setIsSearching] = useState(false);
   const navigate = useNavigate();
+  const { setMovies, searchTerm, setSearchTerm, setIsLoading } =
+    useContext(MovieContext);
 
   useEffect(() => {
     if (searchTerm) {
-      setIsSearching(true);
+      setIsLoading(true);
+      const delayTimer = setTimeout(() => {
+        fetchMovies();
+      }, 1000); // Adjust the delay time (in milliseconds) as needed
 
-      fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&include_adult=false&language=en-US&page=1&query=${searchTerm}`
-      )
-        .then((res) => res.json())
-        .then((data) => {
-          setSearchResults(data.results);
-        })
-        .catch((error) => {
-          console.error("Error fetching search results:", error);
-        })
-        .finally(() => {
-          setIsSearching(false);
-        });
+      return () => clearTimeout(delayTimer); // Clear the timeout if the component unmounts or if a new search term is entered
     }
-  }, [searchTerm]);
+  }, [searchTerm, setMovies, setIsLoading]);
+
+  const fetchMovies = () => {
+    fetch(
+      `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&include_adult=false&language=en-US&page=1&query=${searchTerm}`
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setMovies(data.results);
+      })
+      .catch((error) => {
+        console.error("Error fetching search results:", error);
+      })
+      .finally(() => {
+        setIsLoading(false); // Set loading to false whether the fetch is successful or not
+      });
+  };
 
   const handleInputChange = (event) => {
-    setSearchTerm(event.target.value);
-  };
-
-  const handleSearchItemClick = (id) => {
-    resetSearchResults();
-    navigate(`/movie/${id}`);
-  };
-
-  const resetSearchResults = () => {
-    setSearchResults([]);
-    setSearchTerm("");
+    const newSearchTerm = event.target.value;
+    setSearchTerm(newSearchTerm);
   };
 
   return (
@@ -56,22 +51,7 @@ const SearchBar = () => {
           onChange={handleInputChange}
           placeholder="Search movies..."
         />
-        <button className="btnSearch" onClick={() => setSearchTerm(searchTerm)}>
-          Search
-        </button>
       </div>
-
-      {!isSearching && (
-        <div className="moviesPage">
-          {searchResults.map((movie) => (
-            <MovieItem
-              key={movie.id}
-              movie={movie}
-              onClick={() => handleSearchItemClick(movie.id)}
-            />
-          ))}
-        </div>
-      )}
     </div>
   );
 };

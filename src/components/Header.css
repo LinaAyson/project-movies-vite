@@ -12,6 +12,10 @@ li a {
 ul,
 ol {
   list-style: none;
+  display: flex;
+}
+ul a {
+  margin: 1rem;
 }
 a:hover {
   text-decoration: underline;

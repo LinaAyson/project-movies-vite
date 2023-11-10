@@ -10,3 +10,11 @@
   color: #fff;
   padding: 10px;
 }
+.searchBar input {
+  background-color: #191919;
+  color: white;
+  border: 1px solid #cc002a;
+  border-radius: 10px;
+  font-size: 24px;
+  padding: 1rem;
+}

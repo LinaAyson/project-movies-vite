@@ -48,7 +48,7 @@
 }
 
 .detailsPage img {
-  border: 5px solid #262626;
+  border: 5px solid #cc0028;
   width: 200px;
 }
 
@@ -86,10 +86,10 @@
 }
 .detailsPage .details {
   backdrop-filter: blur(10px);
-  color: black;
+  color: #fff;
   padding: 0.7rem;
   border-radius: 0.5rem;
-  background-color: rgb(201 201 201 / 50%);
+  background-color: #7171713b;
 }
 
 .detailsPage .details h1 {
