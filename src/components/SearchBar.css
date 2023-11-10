@@ -1,0 +1,12 @@
+.searchBar {
+  display: flex;
+  margin: 1rem;
+  justify-content: center;
+  width: 100%;
+}
+.btnSearch {
+  background-color: #cc0028;
+  border: none;
+  color: #fff;
+  padding: 10px;
+}

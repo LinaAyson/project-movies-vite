@@ -114,10 +114,3 @@ This route expects a movie ID in the URL and is responsible for showing more det
 - When you load a movie, you get a lot of information in the API response, such as a collection it belongs to, genres it has, or the companies involved with producing the film. Each of these has an API endpoint that can be used to fetch more information about that entity. You could use this data to make links from your movie page to another page. Take a look through the documentation and be creative!
 Example:
 Some movies have a list of production companies. You could iterate over this list and add a link to each production company to your page. Then, when the user clicks the link, they go to another page that loads information about that production company and perhaps a list of films which they’ve produced.
-
-
-
-
-
-
-
