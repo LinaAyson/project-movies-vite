@@ -3,13 +3,14 @@ import { useParams, Link } from "react-router-dom";
 import { TiChevronLeft, TiStar } from "react-icons/ti";
 import "./MovieDetails.css";
 // declaring my apikey to a variable
-const apiKey = "85a6b417525168d12e79799b0228bf42";
 
 export default function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState();
   const { id } = useParams();
+  const apiKey = "85a6b417525168d12e79799b0228bf42";
 
   useEffect(() => {
+    // const apiEnv = import.meta.env.VITE_OPENDB_KEY;
     fetch(
       `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`
     )

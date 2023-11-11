@@ -11,6 +11,7 @@ export default function PopularMovies() {
     useContext(MovieContext);
 
   useEffect(() => {
+    const apiEnv = import.meta.env.VITE_OPENDB_KEY;
     const fetchMovies = async () => {
       try {
         setIsLoading(true); // Set loading to true when fetching
