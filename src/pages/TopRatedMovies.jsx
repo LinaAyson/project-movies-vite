@@ -3,17 +3,21 @@ import "./PopularMovies.css";
 import { MovieContext } from "../context/MovieContext";
 import MovieItem from "../components/MovieItem";
 
-export default function PopularMovies() {
-  const { movies, setMovies, searchTerm, isLoading, setIsLoading } =
-    useContext(MovieContext);
+export default function TopRatedMovies() {
+  const {
+    movies = [],
+    setMovies,
+    searchTerm,
+    isLoading,
+    setIsLoading,
+  } = useContext(MovieContext);
   const apiKey = import.meta.env.VITE_OPENDB_KEY;
-
   useEffect(() => {
     const fetchMovies = async () => {
       try {
         setIsLoading(true); // Set loading to true when fetching
         const response = await fetch(
-          `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=1`
+          `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`
         );
         const data = await response.json();
         setMovies(data.results);

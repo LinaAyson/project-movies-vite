@@ -3,13 +3,12 @@ import { useNavigate } from "react-router-dom";
 import { MovieContext } from "../context/MovieContext";
 import "./SearchBar.css";
 
-const apiKey = "85a6b417525168d12e79799b0228bf42";
-
 const SearchBar = () => {
   const navigate = useNavigate();
   const { setMovies, searchTerm, setSearchTerm, setIsLoading } =
     useContext(MovieContext);
 
+  const apiKey = import.meta.env.VITE_OPENDB_KEY;
   useEffect(() => {
     if (searchTerm) {
       setIsLoading(true);

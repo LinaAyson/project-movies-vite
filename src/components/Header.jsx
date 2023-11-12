@@ -14,11 +14,8 @@ export default function Header() {
           </NavLink>
         </li>
         <li>
-          <NavLink to="/upcoming">Upcoming</NavLink>
+          <NavLink to="/upcoming">Top Rated Movies</NavLink>
         </li>
-        {/* <li>
-          <NavLink to="/contact">Contact</NavLink>
-        </li> */}
       </ul>
     </nav>
   );
